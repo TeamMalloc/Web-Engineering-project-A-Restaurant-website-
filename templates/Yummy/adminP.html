@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="testimonial_ssection p-3">
+            <div class="testimonial_title ">
+                <div class="alert alert-warning text-center p-3" role="alert">
+                    <h3>Table Reservation List. </h3>
+                </div>
+            </div>
+            <div class="testimonial_table">
+                <table class="table table-success table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Time</th>
+                            <th scope="col">Number of People</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% if pos %}
+                        {% for p in pos %}
+                        <tr>
+                            <td> {{p.id}} </td>
+                            <td>{{p.name}}</td>
+                            <td>{{p.email}}</td>
+                            <td>{{p.date}}</td>
+                            <td>{{p.time}}</td>
+                            <td>{{p.people}}</td>
+                            <td>
+                                <form action=" {% url 'adminP' p.name %} " method="post">
+                                    {% csrf_token %}
+                                    <input type="submit" class="btn btn-outline-danger" value="Delete">
+                                </form>
+                                <!-- <a href="#" class="btn btn-danger btn-sm">Delete</a> -->
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
